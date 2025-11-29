@@ -12,9 +12,12 @@ from services.pdf_parser import extract_invoice_data
 
 router = APIRouter(prefix="/invoices", tags=["invoices"])
 
-# Get project root directory (parent of backend)
-PROJECT_ROOT = Path(__file__).parent.parent.parent
-LOGO_PATH = PROJECT_ROOT / "favicon.png"
+# Get backend directory for assets
+BACKEND_DIR = Path(__file__).parent.parent
+LOGO_PATH = BACKEND_DIR / "favicon.png"
+
+# Uploads directory (created if needed)
+UPLOADS_DIR = BACKEND_DIR / "uploads"
 
 
 def get_optional_user(authorization: Optional[str] = Header(None)):
@@ -304,14 +307,13 @@ async def upload_invoice(file: UploadFile = File(...)):
             raise HTTPException(status_code=400, detail="File too large (max 10MB)")
 
         # Save the PDF to the uploads directory
-        uploads_dir = PROJECT_ROOT / "uploads"
-        uploads_dir.mkdir(exist_ok=True)
+        UPLOADS_DIR.mkdir(exist_ok=True)
 
         # Generate unique filename
         file_id = str(uuid.uuid4())
         safe_filename = "".join(c for c in file.filename if c.isalnum() or c in ('_', '-', '.')).strip()
         saved_filename = f"{file_id}_{safe_filename}"
-        file_path = uploads_dir / saved_filename
+        file_path = UPLOADS_DIR / saved_filename
 
         with open(file_path, "wb") as f:
             f.write(pdf_bytes)

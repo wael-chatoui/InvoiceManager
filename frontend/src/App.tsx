@@ -48,7 +48,10 @@ function InvoiceApp() {
     return (
       <div className="app">
         <header className="app-header">
-          <h1><FileText size={32} /> {t('title')}</h1>
+          <h1>
+            <img src="/logo.png" alt="Logo" className="header-logo" />
+            {t('title')}
+          </h1>
           <LanguageSelector />
         </header>
         <AuthForm />
@@ -130,7 +133,10 @@ function InvoiceApp() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1><FileText size={32} /> {t('title')}</h1>
+        <h1>
+          <img src="/logo.png" alt="Logo" className="header-logo" />
+          {t('title')}
+        </h1>
         <div className="header-actions">
           <div className="user-info">
             <User size={18} />

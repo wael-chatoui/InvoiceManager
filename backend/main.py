@@ -18,14 +18,24 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS configuration
+# CORS configuration - build allowed origins list
+allowed_origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+]
+
+# Add frontend URL from environment (for production)
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url:
+    # Support comma-separated URLs for multiple frontends
+    for url in frontend_url.split(","):
+        url = url.strip()
+        if url and url not in allowed_origins:
+            allowed_origins.append(url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",  # Vite dev server
-        "http://localhost:3000",
-        os.getenv("FRONTEND_URL", "http://localhost:5173")
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

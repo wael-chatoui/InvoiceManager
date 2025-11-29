@@ -25,6 +25,12 @@
   font-size: 1.75rem;
 }
 
+.header-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
 /* Language Selector */
 .language-selector {
   display: flex;
