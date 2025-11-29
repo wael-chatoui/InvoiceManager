@@ -32,8 +32,8 @@ invoice/
 ├── supabase/              # Supabase configuration
 │   ├── config.toml
 │   └── migrations/        # Database migrations
-├── gui_invoice_app.py      # Original Tkinter GUI (legacy)
-└── invoice_generator.py    # Original generator (legacy)
+├── uploads/               # Uploaded PDF files
+└── start.sh               # Script to start both servers
 ```
 
 ## Features
@@ -165,11 +165,3 @@ The app uses two tables with Row Level Security (RLS):
 6. Click "Save Invoice" to store it in the database
 7. View past invoices in the History tab
 8. **Upload PDF**: Import existing invoices to extract data
-
-## Legacy GUI
-
-The original Tkinter GUI is still available:
-
-```bash
-python gui_invoice_app.py
-```
