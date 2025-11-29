@@ -173,7 +173,3 @@ The original Tkinter GUI is still available:
 ```bash
 python gui_invoice_app.py
 ```
-
-## License
-
-MIT
